@@ -4,7 +4,11 @@ const mongoose = require('mongoose')
 const {MongoURI} = require('./keys')
 const port = 3600
 
+
 require('./models/user')
+app.use(express.json())
+
+app.use(require('./routes/auth'))
 
 mongoose.connect(MongoURI,
     {
