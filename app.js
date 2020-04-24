@@ -4,12 +4,6 @@ const mongoose = require('mongoose')
 const {MongoURI} = require('./keys')
 const port = 3600
 
-
-require('./models/user')
-app.use(express.json())
-
-app.use(require('./routes/auth'))
-
 mongoose.connect(MongoURI,
     {
         useNewUrlParser: true,
@@ -17,6 +11,14 @@ mongoose.connect(MongoURI,
     })
 .then(() => console.log("Connected to database ...."))
 .catch(err => console.log(err))
+
+
+require('./models/user')
+require('./models/post')
+app.use(express.json())
+
+app.use(require('./routes/auth'))
+app.use(require('./routes/post'))
 
 app.get('/',(req,res) =>{
     res.send("Hello world")
