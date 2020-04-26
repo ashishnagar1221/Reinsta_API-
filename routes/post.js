@@ -5,8 +5,8 @@ const Post = mongoose.model('Post')
 const reqAccess = require('../middleware/reqLogin')
 
 router.post('/newPost',reqAccess,(req,res) => {
-    const {title,body} = req.body
-    if(!title || !body){
+    const {title,body,pic} = req.body
+    if(!title || !body || !pic){
         return res.status(422).json({error:"Please fill all the field"})
     }
     // console.log(req.user)
@@ -15,6 +15,7 @@ router.post('/newPost',reqAccess,(req,res) => {
     const post = new Post({
         title,
         body,
+        photo:pic,
         postedBy:req.user
     
     })

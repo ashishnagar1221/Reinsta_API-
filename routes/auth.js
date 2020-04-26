@@ -18,7 +18,7 @@ router.post('/signup',(req,res) =>{
     User.findOne({email:email})
     .then((saveData) =>{
         if(saveData){
-            return res.json({error:"This email is already registered"})
+            return res.status(422).json({error:"This email is already registered"})
         }
         bcrypt.hash(password,13)
         .then(hashed =>{
@@ -58,7 +58,8 @@ router.post('/signin',(req,res) =>{
         .then(match =>{
             if(!match){
                 const token = jwt.sign({_id:addUsr._id},jwtSrc)
-                res.json(token)
+                const {_id,name,email} = addUsr
+                res.json({token,user:{_id,name,email}})
             }
             //res.json({message:"sucessfully signed in"})
             else{
