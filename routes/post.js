@@ -28,7 +28,7 @@ router.post('/newPost',reqAccess,(req,res) => {
 })
 
 
-router.get('/allpost',(req,res) =>{
+router.get('/allpost',reqAccess,(req,res) =>{
     Post.find()
     .populate('postedBy',"_id name")
     .then(allpost =>{
@@ -44,10 +44,14 @@ router.get("/myPost",reqAccess,(req,res) =>{
     Post.find({postedBy:req.user._id})
     .populate("postedBy","_id name")
     .then(mypost =>{
-        res.json(mypost)
+        res.json({mypost})
     })
     .catch(err =>{
         console.log(err)
     })
+})
+
+router.put('/like',reqAccess,(req,res) =>{
+    Post.findByIdAndUpdate(req.body.postId)
 })
 module.exports = router
