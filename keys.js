@@ -1,4 +1,4 @@
 module.exports ={
-    MongoURI:"mongodb://127.0.0.1:27017/Reinsta",
+    MongoURI:"mongodb+srv://user:root@taramandal-puhil.mongodb.net/Reinsta?retryWrites=true&w=majority",
     jwtSrc :"qwasxzredfcv"
 }
