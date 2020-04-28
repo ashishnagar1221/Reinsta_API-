@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 const {MongoURI} = require('./keys')
-const port = 3600
+const port = process.env.PORT || 3600
 
 mongoose.connect(MongoURI,
     {
