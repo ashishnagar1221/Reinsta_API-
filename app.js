@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const {MongoURI} = require('./keys')
 const port = process.env.PORT || 3600
+const cors = require('cors')
 
 mongoose.connect(MongoURI,
     {
@@ -16,6 +17,7 @@ mongoose.connect(MongoURI,
 require('./models/user')
 require('./models/post')
 app.use(express.json())
+app.use(cors())
 
 app.use(require('./routes/auth'))
 app.use(require('./routes/post'))
