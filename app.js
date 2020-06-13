@@ -22,6 +22,7 @@ app.use(cors())
 app.use(require('./routes/auth'))
 app.use(require('./routes/post'))
 
+
 app.get('/',(req,res) =>{
     res.send("Hello world")
 })
