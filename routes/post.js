@@ -125,4 +125,17 @@ router.delete('/delete/:postId',reqAccess,(req,res)=>{
     })
 })
 
+router.get('/allfollowpost',reqAccess,(req,res) =>{
+    Post.find({postedBy:{$in:req.user.following}})
+    .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name")
+    .then(allpost =>{
+        res.json({allpost})
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+})
+
+
 module.exports = router
