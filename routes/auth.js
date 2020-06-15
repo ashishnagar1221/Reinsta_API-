@@ -11,7 +11,7 @@ router.get('/protected',reqAccess,(req,res) =>{
     res.send("hello from protected URL")
 })
 router.post('/signup',(req,res) =>{
-    const {name,email,password} = req.body
+    const {name,email,password,pic} = req.body
     if(!name || ! email || !password){
         res.json({error:"Please add all the values"})
     }
@@ -25,7 +25,8 @@ router.post('/signup',(req,res) =>{
             const user = new User({
                 name,
                 email,
-                password:hashed
+                password:hashed,
+                pic
             })
     
             user.save()
@@ -58,8 +59,8 @@ router.post('/signin',(req,res) =>{
         .then(match =>{
             if(match){
                 const token = jwt.sign({_id:addUsr._id},jwtSrc)
-                const {_id,name,email,followers,following} = addUsr
-                res.json({token,user:{_id,name,email,followers,following}})
+                const {_id,name,email,followers,following,pic} = addUsr
+                res.json({token,user:{_id,name,email,followers,following,pic}})
             }
             //res.json({message:"sucessfully signed in"})
             else{
